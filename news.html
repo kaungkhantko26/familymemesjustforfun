@@ -15,7 +15,7 @@
 
   <!-- Theme CSS -->
   <link rel="stylesheet" href="style.css">
-  <!-- Google tag (gtag.js) -->
+   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-R6X1L8KYTJ"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -35,7 +35,6 @@
         <p class="tagline">No Star Is Out Of Reach</p>
       </div>
     </div>
-    <button id="halloweenToggle" class="btn" type="button" title="Toggle Halloween theme" aria-pressed="false">🎃 Halloween</button>
   </header>
 
   <!-- NAV -->
@@ -55,15 +54,11 @@
     <!-- Featured Story -->
     <article class="card card-news" aria-labelledby="feat-title">
       <h2 id="feat-title"><i class="fa-solid fa-star"></i> Featured: Halloween</h2>
-      <div style="display:grid; grid-template-columns: 320px 1fr; gap:16px; align-items:start;">
+      <div style="display:flex; flex-direction:column; gap:12px; align-items:center;">
         <figure style="margin:0;">
           <img loading="lazy" alt="Halloween poster" src="happy-halloween-halloween-background-with-pumpkin-and-batssocial-media-design-free-vector.jpg" style="width:400px; height:400px; object-fit:cover; border-radius:12px;">
         </figure>
-        <div>
-            <a class="btn btnoutline" href="hallo.html">Read more</a>
-          <div style="margin-bottom:12px;">
-          </div>
-        </div>
+        <a class="btn btnoutline" href="hallo.html">Read more</a>
       </div>
     </article>
 
@@ -74,24 +69,20 @@
       <div id="newsList" style="display:grid; gap:14px; margin-top:12px;">
         <!-- Example news items -->
         <article class="card" aria-labelledby="n1">
-          <h3 id="n1">မိသားစုကိုယ်ပိုင်အထက်တန်းကျောင်း(မလှိုင်) </h3>
-          <time datetime="2025-5-9" style="color:var(--muted); font-weight:700;">Sep 05, 2025</time>
+          <h3 id="n1">မိသားစုကိုယ်ပိုင်အထက်တန်းကျောင်း(မလှိုင်)</h3>
+          <time datetime="2025-09-05" style="color:var(--muted); font-weight:700;">Sep 05, 2025</time>
           <div style="margin-top:10px;">
             <a class="btn btnoutline" href="read1.html">Read more</a>
           </div>
-          <div id="newsList" style="display:grid; gap:14px; margin-top:12px;">
-            <!-- Example news items -->
-            <article class="card" aria-labelledby="n1">
-              <h3 id="n1">မိသားစုကိုယ်ပိုင်အထက်တန်းကျောင်း(မကွေး) </h3>
-              <time datetime="2025-15-07" style="color:var(--muted); font-weight:700;">July 15, 2025</time>
-              <div style="margin-top:10px;">
-                <a class="btn btnoutline" href="read2.html">Read more</a>
-              </div>
         </article>
 
-      
-
-    
+        <article class="card" aria-labelledby="n2">
+          <h3 id="n2">မိသားစုကိုယ်ပိုင်အထက်တန်းကျောင်း()</h3>
+          <time datetime="2025-07-15" style="color:var(--muted); font-weight:700;">July 15, 2025</time>
+          <div style="margin-top:10px;">
+            <a class="btn btnoutline" href="read2.html">Read more</a>
+          </div>
+        </article>
       </div>
 
       <!-- Pagination (front-end stub) -->
@@ -102,14 +93,12 @@
       </div>
     </section>
 
-  
-
   </main>
 
   <!-- FOOTER -->
   <footer class="copyright" role="contentinfo">
     <p>Copyright 2025 © FMJFF All Rights Reserved | Developed by FMJFF</p>
-</footer>
+  </footer>
 
   <!-- SCRIPT -->
   <script src="script.js"></script>
