@@ -1,0 +1,635 @@
+/* ======================================================
+   Fixed Full CSS — Theme variables + Halloween-ready
+   Ensure text colors use variables so toggling theme works
+   ====================================================== */
+
+/* ---------- 0. Theme variables (light by default) ---------- */
+:root{
+    --bg: #f4f7f6;
+    --surface: #ffffff;
+    --card-surface: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9));
+    --muted: #666666;
+    --text: #222222;
+    --brand: #4A6B8A;
+    --accent: #F9A826;
+    --warm: #E67E22;
+    --meme: #F1C40F;
+    --news: #3498DB;
+    --mail: #2ECC71;
+    --shadow-1: 0 6px 18px rgba(28,39,49,0.08);
+    --shadow-2: 0 12px 30px rgba(28,39,49,0.10);
+    --radius-lg: 20px;
+    --radius-sm: 12px;
+    --max-width: 1200px;
+    --focus: 3px solid rgba(249,168,38,0.18);
+    --transition: 280ms cubic-bezier(.2,.9,.3,1);
+    --glass: rgba(255,255,255,0.03);
+  }
+  
+  /* ---------- Halloween theme overrides (body.halloween) ----------
+     JS may also set inline variables on :root for stronger contrast
+     --------------------------------------------------------------- */
+  body.halloween {
+    /* keep these as defaults in CSS; JS can override with inline vars */
+    --bg: linear-gradient(180deg,#0b0711 0%, #221022 50%, #2b0a06 100%);
+    --surface: rgba(20,10,20,0.6);
+    --card-surface: linear-gradient(180deg, rgba(20,10,20,0.6), rgba(35,6,6,0.4));
+    --text: #f6efe9;
+    --muted: #d9c7b5;
+    --brand: #ff7b1a;
+    --accent: #ffb84d;
+    --shadow-1: 0 8px 28px rgba(0,0,0,0.65);
+    --shadow-2: 0 18px 50px rgba(0,0,0,0.75);
+  }
+  
+  /* ---------- Global resets & base ---------- */
+  *,
+  *::before,
+  *::after { box-sizing: border-box; }
+  
+  /* --- MODIFIED for sticky footer --- */
+  html {
+    height: 100%;
+  }
+
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.45;
+    -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
+    
+    /* --- ADDED for sticky footer --- */
+    display: flex;
+    flex-direction: column;
+    min-height: 100dvh; /* 100% of the *dynamic* viewport height */
+  }
+  
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    :root { --transition: 1ms; }
+    * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  }
+  
+  /* Utility helpers */
+  .container {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  /* ---------- Header & Logo Area ---------- */
+  .site-header {
+    background: linear-gradient(180deg, var(--brand), color-mix(in srgb, var(--brand) 85%, transparent));
+    padding: 20px 30px;
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    border-bottom: 4px solid var(--accent);
+    box-shadow: var(--shadow-1);
+    position: relative;
+    z-index: 5;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  
+  .site-header .logo {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 2px solid rgba(255,255,255,0.9);
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(0,0,0,0.06));
+    display: inline-block;
+    flex-shrink: 0;
+    transition: transform var(--transition), filter var(--transition);
+  }
+  
+  /* Soft hover lift for logo */
+  .site-header .logo:hover { transform: translateY(-4px) rotate(-2deg); }
+  
+  .title-group h1 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.4px;
+    line-height: 1.05;
+  }
+  
+  .title-group .tagline {
+    margin: 0;
+    font-size: 0.96rem;
+    font-weight: 600;
+    color: var(--accent);
+    opacity: 0.98;
+  }
+  
+  /* ---------- Main Navigation Pill ---------- */
+  .main-nav {
+    display: block;
+    width: fit-content;
+    margin: 28px auto 30px auto; /* pulled up over header */
+    position: relative;
+    z-index: 10;
+    background: var(--surface);
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(215, 22, 22, 0.03);
+  }
+  
+  .main-nav ul {
+    list-style: none;
+    margin: 10px;
+    padding: 0;
+    display: flex;
+    gap: 22px;
+    align-items: center;
+    justify-content: center;
+  }
+  .main-nav ul { flex-wrap: wrap; justify-content: center; gap: 8px; }
+
+  
+  .main-nav a {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 1.05rem;
+    padding: 8px 12px;
+    border-radius: 999px;
+    transition: background var(--transition), color var(--transition), transform var(--transition);
+    outline: none;
+  }
+  
+  /* hover & active styles */
+  .main-nav a:hover,
+  .main-nav a:focus,
+  .main-nav a.active {
+    background: linear-gradient(90deg, var(--accent), color-mix(in srgb, var(--accent) 65%, white));
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-2);
+  }
+  
+  /* visible focus */
+  .main-nav a:focus-visible {
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08), var(--focus);
+    border-radius: 999px;
+  }
+  
+  /* ---------- Main Content Grid ---------- */
+  .main-content {
+    max-width: var(--max-width);
+    margin: 20px auto 60px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 26px;
+    align-items: start;
+    
+    /* --- ADDED for sticky footer --- */
+    flex-grow: 1; /* This makes the content area push the footer down */
+  }
+  
+  /* ---------- Cards ---------- */
+  .card {
+    background: var(--card-surface);
+    border-radius: var(--radius-lg);
+    padding: 22px;
+    box-shadow: var(--shadow-1);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    overflow: hidden;
+    border: 1px solid rgba(34,34,34,0.03);
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: var(--text);
+  }
+  
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-2);
+  }
+  
+  .card h2 {
+    margin: 0;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--brand);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .card p,
+  .card ul,
+  .card li {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--muted);
+  }
+  
+  /* Make sure lists inherit variable color */
+  .card ul { padding-left: 1.1rem; list-style: disc; color: var(--muted); }
+  
+  /* Variant colored cards (using variables where possible) */
+  .card.card-halloween {
+    background: linear-gradient(180deg, var(--warm), color-mix(in srgb, var(--warm) 85%, var(--surface)));
+    color: var(--text);
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+  .card.card-halloween h2 { color: var(--accent); }
+  
+  .card.card-news {
+    background: linear-gradient(180deg, var(--news), color-mix(in srgb, var(--news) 85%, var(--surface)));
+    color: var(--text);
+  }
+  .card.card-news ul { list-style: none; padding-left: 0; color: var(--muted); }
+  .card.card-news li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.14);
+  }
+  
+  .card.card-meme {
+    background: linear-gradient(180deg, var(--meme), color-mix(in srgb, var(--meme) 85%, var(--surface)));
+    color: var(--text);
+  }
+  .card.card-meme .meme-content {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+  }
+  .card.card-meme .meme-content i { font-size: 2.6rem; line-height: 1; }
+  
+  .card.card-mailbox {
+    background: linear-gradient(180deg, var(--mail), color-mix(in srgb, var(--mail) 85%, var(--surface)));
+    color: var(--text);
+  }
+  .card.card-address {
+    background: var(--surface);
+    color: var(--text);
+  }
+  .card.card-address iframe {
+    width: 100%;
+    height: 200px;
+    border: 0;
+    border-radius: 12px;
+    margin-top: 10px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  }
+  
+  /* Images */
+  .card img { max-width: 100%; height: auto; border-radius: 10px; display: block; }
+  
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(180deg, var(--brand), color-mix(in srgb, var(--brand) 70%, #fff));
+    color: var(--surface); /* button text should contrast with brand */
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow: 0 8px 22px rgba(34,34,34,0.08);
+    transition: transform var(--transition), box-shadow var(--transition), opacity var(--transition);
+    text-decoration: none;
+  }
+  
+  .btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); }
+  .btn:active { transform: translateY(-1px); }
+  
+  .btn-outline {
+    background: transparent;
+    color: var(--brand);
+    border: 2px solid color-mix(in srgb, var(--brand) 18%, transparent);
+    font-weight: 800;
+  }
+  
+  /* Focus-visible for accessibility */
+  .btn:focus-visible, .btn-outline:focus-visible {
+    outline: none;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08), var(--focus);
+    border-radius: 12px;
+  }
+  
+  /* ---------- Footer ---------- */
+  /* --- REPLACED for sticky footer and responsiveness --- */
+  .site-footer {
+    text-align: center;
+    padding: 30px 20px; /* Adjusted padding */
+    background: linear-gradient(180deg, color-mix(in srgb, var(--brand) 60%, var(--surface)), var(--brand));
+    color: var(--surface);
+    margin: 40px auto 0 auto; /* Top margin, auto horizontal margins to center */
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    font-size: 0.95rem;
+    
+    /* --- RESPONSIVE FIXES --- */
+    max-width: 600px;  /* This is the max it can be */
+    width: 90%;        /* This lets it shrink on small screens */
+    height: auto;      /* Let content define the height */
+  }
+  
+  /* ---------- Form & input helpers ---------- */
+  .input, input[type="text"], textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,0,0.06);
+    background: rgba(255,255,255,0.9);
+    color: var(--text);
+    font-size: 1rem;
+    transition: box-shadow var(--transition), border-color var(--transition);
+  }
+  
+  .input:focus, input[type="text"]:focus, textarea:focus {
+    outline: none;
+    box-shadow: var(--focus);
+    border-color: var(--accent);
+  }
+  
+  /* When in dark/halloween mode, inputs should be darker with readable text */
+  body.halloween .input,
+  body.halloween input[type="text"],
+  body.halloween textarea {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    color: var(--text);
+  }
+  
+  /* ---------- Utility classes ---------- */
+  .text-center { text-align: center; }
+  .mb-8 { margin-bottom: 2rem; }
+  .mt-6 { margin-top: 1.5rem; }
+  
+  /* ---------- Accessibility sanity checks ---------- */
+  .dark .card.card-news,
+  .dark .card.card-halloween,
+  .dark .card.card-mailbox,
+  .dark .card.card-meme {
+    color: #0b1620;
+  }
+  
+  /* ---------- Halloween decorations & visuals ----------
+     Decorations rely on body.halloween class + JS for injection
+     --------------------------------------------------------- */
+  
+  /* subtle page vignette for creepiness */
+  body.halloween:before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(60% 40% at 10% 10%, rgba(255,120,0,0.03), transparent 10%),
+                radial-gradient(50% 35% at 90% 90%, rgba(0,0,0,0.55), transparent 30%);
+    mix-blend-mode: overlay;
+    z-index: 9998;
+  }
+  
+  /* Adjust header look in halloween mode */
+  body.halloween .site-header {
+    background: linear-gradient(180deg, rgba(18,8,16,0.2), rgba(28,10,6,0.05));
+    border-bottom-color: color-mix(in srgb, var(--brand) 65%, black);
+    box-shadow: var(--shadow-1);
+  }
+  body.halloween .site-header .logo {
+    filter: drop-shadow(0 6px 18px rgba(255,120,30,0.28));
+    border-color: rgba(255,255,255,0.06);
+    transform-origin: center;
+    animation: gentle-sway 6s ease-in-out infinite;
+  }
+  body.halloween .title-group h1 {
+    color: var(--accent);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6), 0 0 12px rgba(255,120,30,0.08);
+    font-family: "Creepster", "Quicksand", sans-serif;
+  }
+  
+  /* nav darker */
+  body.halloween .main-nav {
+    background: rgba(0,0,0,0.28);
+    border: 1px solid rgba(255,140,30,0.06);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+  }
+  body.halloween .main-nav a { color: var(--muted); }
+  body.halloween .main-nav a:hover,
+  body.halloween .main-nav a:focus,
+  body.halloween .main-nav a.active {
+    background: linear-gradient(90deg, rgba(255,120,30,0.18), rgba(255,180,60,0.06));
+    color: #12060a;
+    transform: translateY(-2px) scale(1.02);
+  }
+  
+  /* card styling in halloween mode (spookier) */
+  body.halloween .card {
+    background: var(--card-surface);
+    border: 1px solid rgba(255,120,30,0.06);
+    box-shadow: var(--shadow-1);
+    color: var(--text);
+  }
+  body.halloween .card:hover {
+    transform: translateY(-8px) rotate(-0.5deg);
+    box-shadow: 0 30px 90px rgba(0,0,0,0.75), 0 8px 30px rgba(255,120,30,0.06) inset;
+  }
+  body.halloween .card h2 {
+    color: var(--accent);
+    text-shadow: 0 2px 18px rgba(0,0,0,0.6);
+    font-family: "Creepster", "Quicksand", sans-serif;
+    letter-spacing: 0.6px;
+  }
+  
+  /* variant tweaks */
+  body.halloween .card.card-halloween {
+    background: linear-gradient(180deg, rgba(255,124,20,0.12), rgba(34,8,6,0.4));
+    color: var(--text);
+    border: 1px solid rgba(255,124,20,0.18);
+  }
+  body.halloween .card.card-news {
+    background: linear-gradient(180deg, rgba(70,26,90,0.18), rgba(26,6,26,0.45));
+    color: var(--muted);
+    border: 1px solid rgba(100,40,160,0.06);
+  }
+  body.halloween .card.card-meme {
+    background: linear-gradient(180deg, rgba(255,210,80,0.06), rgba(38,18,11,0.36));
+    color: var(--text);
+    border: 1px solid rgba(255,210,80,0.06);
+  }
+  body.halloween .card.card-mailbox {
+    background: linear-gradient(180deg, rgba(46,204,113,0.04), rgba(18,18,18,0.36));
+    color: var(--muted);
+    border: 1px solid rgba(46,204,113,0.04);
+  }
+  
+  /* spooky button styles */
+  body.halloween .btn {
+    background: linear-gradient(180deg, #ff8c2a, #ff6120);
+    color: #12060a;
+    box-shadow: 0 10px 30px rgba(255,110,40,0.14);
+    border: 1px solid rgba(255,255,255,0.04);
+  }
+  body.halloween .btn-outline {
+    border: 2px dashed rgba(255,160,60,0.16);
+    color: var(--accent);
+    background: transparent;
+  }
+  
+  /* footer tweak */
+  body.halloween .site-footer {
+    background: linear-gradient(180deg, rgba(20,8,10,0.2), rgba(8,6,10,0.55));
+    color: var(--muted);
+    border-top: 1px solid rgba(255,120,30,0.04);
+  }
+  
+  /* ---------- Halloween decorations (emoji-based) ----------
+     Decoration containers are injected by JS when needed
+     ---------------------------------------------------- */
+  .halloween-decor { position: fixed; inset: 0; pointer-events: none; z-index: 9999; overflow: hidden; }
+  .halloween-decor .float { position: absolute; will-change: transform, opacity; font-size: 28px; opacity: 0.95; filter: drop-shadow(0 8px 18px rgba(0,0,0,0.6)); animation: floaty 8s linear infinite; }
+  .halloween-decor .float.f1 { left: 6%; top: 14%; font-size: 44px; animation-duration: 9s; }
+  .halloween-decor .float.f2 { left: 75%; top: 8%; font-size: 34px; animation-duration: 12s; animation-delay: 1.6s; }
+  .halloween-decor .float.f3 { left: 40%; top: 70%; font-size: 48px; animation-duration: 10s; animation-delay: 0.8s; }
+  .halloween-decor .float.f4 { left: 88%; top: 48%; font-size: 36px; animation-duration: 11s; animation-delay: 2.1s; }
+  .halloween-decor .float.f5 { left: 20%; top: 40%; font-size: 28px; animation-duration: 13s; animation-delay: 3.2s; }
+  
+  @keyframes floaty {
+    0%   { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.98; }
+    25%  { transform: translateY(-14px) rotate(-8deg) scale(1.04); opacity: 0.9; }
+    50%  { transform: translateY(-6px) rotate(6deg) scale(1.02); opacity: 0.98; }
+    75%  { transform: translateY(-16px) rotate(-6deg) scale(0.98); opacity: 0.92; }
+    100% { transform: translateY(0) rotate(0deg) scale(1); opacity: 0.98; }
+  }
+  
+  /* falling leaves */
+  .falling { position: fixed; inset: 0; pointer-events: none; z-index: 9997; }
+  .falling .leaf { position: absolute; top: -10%; font-size: 18px; opacity: 0.85; animation: fall linear infinite; transform-origin: center; }
+  .falling .leaf.l1 { left: 8%; animation-duration: 10s; animation-delay: 0s; transform: rotate(12deg); }
+  .falling .leaf.l2 { left: 30%; animation-duration: 12s; animation-delay: 1.2s; transform: rotate(-8deg); }
+  .falling .leaf.l3 { left: 60%; animation-duration: 14s; animation-delay: 0.6s; transform: rotate(6deg); }
+  .falling .leaf.l4 { left: 82%; animation-duration: 11s; animation-delay: 2.1s; transform: rotate(-10deg); }
+  
+  @keyframes fall{
+    0% { transform: translateY(-8vh) rotate(0deg); opacity: 0.0; }
+    10% { opacity: 0.9; }
+    50% { transform: translateY(40vh) rotate(180deg); opacity: 0.85; }
+    90% { opacity: 0.4; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0.0; }
+  }
+  
+  @keyframes gentle-sway { 0% { transform: rotate(0deg); } 50% { transform: rotate(0.6deg); } 100% { transform: rotate(0deg); } }
+  
+  /* focus outlines in halloween */
+  body.halloween a:focus-visible, body.halloween button:focus-visible, body.halloween .btn:focus-visible {
+    outline: 3px solid rgba(255,180,60,0.18);
+    outline-offset: 4px;
+    border-radius: 8px;
+  }
+  
+  /* reduced motion: disable heavy decorations */
+  @media (prefers-reduced-motion: reduce) {
+    .halloween-decor .float, .falling .leaf { animation: none; opacity: 0.9; }
+    .site-header .logo { animation: none; transform: none; }
+    .card:hover { transform: none; }
+  }
+  
+  /* hide heavy decorations on small screens */
+  @media (max-width: 520px) {
+    .halloween-decor, .falling { display: none; }
+  }
+  
+  /* ---------- Responsive tweaks ---------- */
+  @media (max-width: 900px) {
+    .site-header { padding: 16px 18px; }
+    .title-group h1 { font-size: 1.5rem; }
+    .main-nav { margin: -22px auto 24px auto; padding: 8px 12px; }
+    .main-nav ul { gap: 14px; }
+    .card { padding: 18px; }
+  }
+  
+  @media (max-width: 600px) {
+    .site-header { flex-direction: column; gap: 10px; text-align: center; padding: 14px 14px; }
+    .site-header .logo { width: 60px; height: 60px; border-radius: 10px; }
+    .title-group h1 { font-size: 1.25rem; }
+    .main-nav { width: 92%; margin-top: -18px; }
+    .main-content { gap: 16px; grid-template-columns: 1fr; margin-top: 6px; padding-bottom: 30px; }
+    .card.card-address iframe { height: 180px; }
+    
+    /* --- ADDED for mobile nav wrapping --- */
+    .main-nav ul {
+      flex-wrap: wrap; /* Allows nav items to wrap to the next line */
+      justify-content: center;
+      gap: 8px; /* Reduces the gap a bit when wrapped */
+    }
+
+    .main-nav {
+      border-radius: var(--radius-lg); /* A hard pill shape looks odd when wrapped */
+    }
+
+    .card h2 {
+      font-size: 1.2rem; /* Makes card titles more readable on small screens */
+    }
+    
+    .site-footer {
+      /* Make the footer radius less extreme on mobile */
+      border-top-left-radius: 50px;
+      border-top-right-radius: 50px;
+    }
+    /* --------------------------------- */
+  }
+  
+  /* ---------- Modal (mailbox) styling (simple) ---------- */
+  .fc-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10010;
+  }
+  .fc-modal {
+    width: min(720px, 94%);
+    background: var(--surface);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-2);
+    color: var(--text);
+  }
+  .fc-modal h3 { margin: 0 0 10px 0; font-size: 1.25rem; color: var(--brand); }
+  .fc-form label { display: block; margin-top: 10px; font-weight: 700; color: var(--muted); }
+  .fc-actions { display: flex; gap: 10px; margin-top: 14px; justify-content: flex-end; }
+  
+  /* ---------- Small utilities ---------- */
+  .hidden { display: none !important; }
+  .sr-only {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+  /* FOOTER */
+footer.copyright {
+    text-align: center;
+    padding: 12px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.4);
+    background: rgba(25, 25, 35, 0.8);
+    backdrop-filter: var(--glass-blur);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--glass-shadow);
+  }
+  
+  /* End of stylesheet */

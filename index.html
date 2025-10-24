@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Family Community Hub</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Using the 'Creepster' font for Halloween mode, and 'Quicksand' as the main font -->
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- Your CSS file -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<!-- Add 'halloween' class here to test the theme! -->
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="logo-container">
+      <!-- Using a placeholder logo -->
+      <img src="school-logo.png" alt="Logo" class="logo">
+      <div class="title-group">
+        <h1>FAMILY MEMES JUST FOR FUN</h1>
+        <p class="tagline">No Star Is Out Of Reach</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- NAVIGATION -->
+  <nav class="main-nav">
+    <ul>
+      <!-- Added icons to all nav items for consistency -->
+      <li><a href="#" class="active"><i class="fa-solid fa-home fa-fw"></i> Home</a></li>
+      <li><a href="#"><i class="fa-solid fa-users fa-fw"></i> About Us</a></li>
+      <li><a href="#"><i class="fa-solid fa-phone fa-fw"></i> Contact</a></li>
+      <li><a href="#"><i class="fa-solid fa-map-location-dot fa-fw"></i> Address</a></li>
+      <li><a href="#"><i class="fa-solid fa-bullhorn fa-fw"></i> News</a></li>
+      <!-- Added a button to toggle the theme -->
+    </ul>
+  </nav>
+
+  <!-- 
+    MAIN CONTENT 
+    This is your "square box". 
+    Your CSS 'flex-grow: 1' makes it push the footer down.
+  -->
+  <main class="main-content">
+    <div class="card card-halloween">
+      <h2><i class="fa-solid fa-pumpkin"></i> Halloween Party!</h2>
+      <p>🎃 Join the fun on <strong>October 31st</strong>! Don’t forget your costume!</p>
+      <!-- This is a standard link styled as a button -->
+      <a href="#" class="btn mt-6" role="button">Not Open Yet</a>
+    </div>
+
+    <div class="card card-news">
+      <h2><i class="fa-solid fa-newspaper"></i> Latest News</h2>
+      <ul>
+        <li>🏫 Halloween Next Week</li>
+        <li>🤝 Volunteer Signup Open</li>
+        <li>🍱 New Website Lunch</li>
+      </ul>
+      <!-- Converted to a link (<a> tag) for correct navigation -->
+      <a href="news.html" class="btn mt-6" role="button">Click here to Read News</a>
+    </div>
+
+    <div class="card card-meme">
+      <h2><i class="fa-solid fa-face-laugh-beam"></i> Meme of the Week</h2>
+      <div class="meme-content">
+        <p>Memes On Facebook</p>
+        <!-- Converted to a link that opens in a new tab -->
+        <a href="https://www.facebook.com/share/1BkWVLD1YN/?mibextid=wwXIfr" class="btn mt-6" target="_blank" rel="noopener noreferrer" role="button">Go to Memes</a>
+      </div>
+    </div>
+
+    <div class="card card-mailbox">
+      <h2><i class="fa-solid fa-envelope"></i> Our Mailbox</h2>
+      <p>Send your message directly to the admin team 💌</p>
+      
+      <!-- Changed this button to make sense for the card -->
+      <a href="https://emb.fouita.com/widget/0x2bdac8/ftpqw070h" class="btn mt-6" target="_blank" rel="noopener noreferrer" role="button">Send Message</a>
+    </div>
+
+    <!-- 
+      This is the simple modal structure from your CSS. 
+      It's hidden by default.
+    -->
+
+  </main> <!-- END of main-content -->
+
+  <!-- 
+    FOOTER SECTION
+    This is NOW OUTSIDE <main> so it's pushed to the bottom.
+  -->
+
+  <footer class="copyright">
+    <p>FMJJFF © 2025 | Built by FMJJFF</p>
+  </footer>
+
+  <!-- Your JavaScript file -->
+  <script src="script.js"></script>
+</body>
+</html>
