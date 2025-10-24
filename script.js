@@ -1,10 +1,10 @@
 /* script.js — Fixed version without mailbox modal */
 
 const THEME_KEY = 'family_hub_halloween';
-const REDUCED_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const REDUCED_MOTION = window.matchMedia('(prefers-motion: fast)').matches;
 
 /* Tiny helpers */
-const q = (sel, ctx = document) => document.querySelector(sel, ctx);
+const q = (sel, ctx = document) => (ctx || document).querySelector(sel);
 const qAll = (sel, ctx = document) => Array.from((ctx || document).querySelectorAll(sel));
 const create = (tag, props = {}, children = []) => {
   const el = document.createElement(tag);
@@ -28,11 +28,11 @@ function makeDecorFragment() {
 
   const decor = create('div', { class: 'halloween-decor', 'aria-hidden': 'true' });
   const floats = [
-    { cls: 'f1', emoji: '🎃' },
-    { cls: 'f2', emoji: '🦇' },
-    { cls: 'f3', emoji: '🎃' },
-    { cls: 'f4', emoji: '🦇' },
-    { cls: 'f5', emoji: '🍂' },
+    { cls: 'f1', emoji: '' },
+    { cls: 'f2', emoji: '' },
+    { cls: 'f3', emoji: '' },
+    { cls: 'f4', emoji: '' },
+    { cls: 'f5', emoji: '' },
   ];
   floats.forEach(f => {
     const el = create('div', { class: `float ${f.cls}` });
@@ -47,7 +47,10 @@ function makeDecorFragment() {
     { cls: 'l2', emoji: '🍂' },
     { cls: 'l3', emoji: '🍁' },
     { cls: 'l4', emoji: '🍂' },
+    { cls: 'l5', emoji: '🍂' },
+    { cls: 'l6', emoji: '🍂' },
   ];
+
   leaves.forEach(l => {
     const el = create('div', { class: `leaf ${l.cls}` });
     el.textContent = l.emoji;
@@ -174,6 +177,9 @@ function lazyLoadIframes() {
 /* Button clicks — navigation only */
 function wireButtonClicks() {
   qAll('.btn').forEach(btn => {
+    // Skip anchors to let them behave naturally
+    if (btn.tagName === 'A') return;
+
     if (btn._hasClickAnim) return;
     btn._hasClickAnim = true;
 

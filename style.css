@@ -5,14 +5,14 @@
 
 /* ---------- 0. Theme variables (light by default) ---------- */
 :root{
-    --bg: #f4f7f6;
+    --bg: #6f83e9;
     --surface: #ffffff;
     --card-surface: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9));
-    --muted: #666666;
+    --muted: #484444;
     --text: #222222;
     --brand: #4A6B8A;
     --accent: #F9A826;
-    --warm: #E67E22;
+    --warm: #e57513;
     --meme: #F1C40F;
     --news: #3498DB;
     --mail: #2ECC71;
@@ -623,7 +623,7 @@
   /* FOOTER */
 footer.copyright {
     text-align: center;
-    padding: 12px;
+    padding: 20px;
     font-size: 13px;
     color: rgba(255, 255, 255, 0.4);
     background: rgba(25, 25, 35, 0.8);

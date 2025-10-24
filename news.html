@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>News — Family Memes Just For Fun</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- Theme CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header container" role="banner" aria-label="Site header">
+    <div class="logo-container">
+      <img src="school-logo.png" alt="Family Memes logo" class="logo">
+      <div class="title-group">
+        <h1>FAMILY MEMES JUST FOR FUN</h1>
+        <p class="tagline">No Star Is Out Of Reach</p>
+      </div>
+    </div>
+    <button id="halloweenToggle" class="btn" type="button" title="Toggle Halloween theme" aria-pressed="false">🎃 Halloween</button>
+  </header>
+
+  <!-- NAV -->
+  <nav class="main-nav" role="navigation" aria-label="Main navigation">
+    <ul class="container" role="list">
+      <li role="listitem"><a href="index.html"><i class="fa-solid fa-home fa-fw"></i> Home</a></li>
+      <li role="listitem"><a href="aboutus.html"><i class="fa-solid fa-users fa-fw"></i> About Us</a></li>
+      <li role="listitem"><a href="contact.html"><i class="fa-solid fa-phone fa-fw"></i> Contact</a></li>
+      <li role="listitem"><a href="address.html"><i class="fa-solid fa-map-location-dot fa-fw"></i> Address</a></li>
+      <li role="listitem"><a href="news.html" class="active" aria-current="page"><i class="fa-solid fa-bullhorn fa-fw"></i> News</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="main-content container" id="main" role="main">
+
+    <!-- Featured Story -->
+    <article class="card card-news" aria-labelledby="feat-title">
+      <h2 id="feat-title"><i class="fa-solid fa-star"></i> Featured: Halloween</h2>
+      <div style="display:grid; grid-template-columns: 320px 1fr; gap:16px; align-items:start;">
+        <figure style="margin:0;">
+          <img loading="lazy" alt="Halloween poster" src="hallo.jpg" style="width:400px; height:400px; object-fit:cover; border-radius:12px;">
+        </figure>
+        <div>
+            <a class="btn btnoutline" href="hallo.html">Read more</a>
+          <div style="margin-bottom:12px;">
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- News list -->
+    <section class="card" aria-labelledby="list-title">
+      <h2 id="list-title"><i class="fa-solid fa-list"></i> News & Updates</h2>
+
+      <div id="newsList" style="display:grid; gap:14px; margin-top:12px;">
+        <!-- Example news items -->
+        <article class="card" aria-labelledby="n1">
+          <h3 id="n1">မိသားစုကိုယ်ပိုင်အထက်တန်းကျောင်း(မလှိုင်) </h3>
+          <time datetime="2025-5-9" style="color:var(--muted); font-weight:700;">Sep 05, 2025</time>
+          <div style="margin-top:10px;">
+            <a class="btn btnoutline" href="read1.html">Read more</a>
+          </div>
+          <div id="newsList" style="display:grid; gap:14px; margin-top:12px;">
+            <!-- Example news items -->
+            <article class="card" aria-labelledby="n1">
+              <h3 id="n1">မိသားစုကိုယ်ပိုင်အထက်တန်းကျောင်း(မကွေး) </h3>
+              <time datetime="2025-15-07" style="color:var(--muted); font-weight:700;">July 15, 2025</time>
+              <div style="margin-top:10px;">
+                <a class="btn btnoutline" href="read2.html">Read more</a>
+              </div>
+        </article>
+
+      
+
+    
+      </div>
+
+      <!-- Pagination (front-end stub) -->
+      <div style="display:flex; justify-content:center; gap:10px; margin-top:18px;">
+        <button class="btn btn-outline" type="button" onclick="alert('Pagination demo')"><i class="fa-solid fa-chevron-left"></i> Prev</button>
+        <button class="btn" type="button" onclick="alert('Pagination demo')">1</button>
+        <button class="btn btn-outline" type="button" onclick="alert('Pagination demo')">Next <i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+    </section>
+
+  
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="copyright" role="contentinfo">
+    <p>Copyright 2025 © FMJFF All Rights Reserved | Developed by FMJFF</p>
+</footer>
+
+  <!-- SCRIPT -->
+  <script src="script.js"></script>
+</body>
+</html>
