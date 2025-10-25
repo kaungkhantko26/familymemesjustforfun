@@ -53,6 +53,38 @@
       <!-- Added a button to toggle the theme -->
     </ul>
   </nav>
+<!-- ---------- Halloween Countdown Card ---------- -->
+<div class="card card-halloween" id="halloween-counter">
+  <h2>🎃 Halloween Countdown</h2>
+  <p id="countdown-text">Loading...</p>
+</div>
+
+<script>
+// Set target date for Halloween
+const halloweenDate = new Date('October 31, 2025 00:00:00').getTime();
+
+function updateCountdown() {
+  const now = new Date().getTime();
+  const distance = halloweenDate - now;
+
+  if(distance < 0) {
+    document.getElementById('countdown-text').innerHTML = "👻 Happy Halloween!";
+    return;
+  }
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000*60*60));
+  const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+  const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+  document.getElementById('countdown-text').innerHTML =
+    `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+
+// Update every second
+setInterval(updateCountdown, 1000);
+updateCountdown();
+</script>
 
   <!-- 
     MAIN CONTENT 
@@ -61,12 +93,20 @@
   -->
   <main class="main-content">
     <div class="card card-halloween">
-      <h2><i class="fa-solid fa-pumpkin"></i> Halloween Party!</h2>
-      <p>🎃 Join the fun on <strong>October 31st</strong>! Don’t forget your costume!</p>
+      <h2><i class="fa-solid fa-pumpkin"></i> ဟောလဝင်းquiz !</h2>
       <!-- This is a standard link styled as a button -->
-      <a href="#" class="btn mt-6" role="button">Not Open Yet</a>
+      <a href="#" class="btn mt-6" role="button">ဟောလဝင်း ရောက်မှသာပွင့်မည်</a>
     </div>
-
+    <div class="card card-halloween">
+      <h2><i class="fa-solid fa-pumpkin"></i> ဟောလဝင်းအကြောင်းတစေ့တစောင်း !</h2>
+      <!-- This is a standard link styled as a button -->
+      <a href="hallo.html" class="btn mt-6" role="button">Click to read</a>
+    </div>
+    <div class="card card-halloween">
+      <h2><i class="fa-solid fa-pumpkin"></i> ကမ္ဘာကျော် သရဲများအကြောင်း !</h2>
+      <!-- This is a standard link styled as a button -->
+      <a href="#" class="btn mt-6" role="button">Page မရှိသေးပါ</a>
+    </div>
     <div class="card card-news">
       <h2><i class="fa-solid fa-newspaper"></i> Latest News</h2>
       <ul>
@@ -94,6 +134,7 @@
       <!-- Changed this button to make sense for the card -->
       <a href="https://emb.fouita.com/widget/0x2bdac8/ftpqw070h" class="btn mt-6" target="_blank" rel="noopener noreferrer" role="button">Send Message</a>
     </div>
+    
 
     <!-- 
       This is the simple modal structure from your CSS. 
