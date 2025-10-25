@@ -53,38 +53,145 @@
       <!-- Added a button to toggle the theme -->
     </ul>
   </nav>
-<!-- ---------- Halloween Countdown Card ---------- -->
-<div class="card card-halloween" id="halloween-counter">
+<!-- ---------- Halloween Flip Clock Countdown ---------- -->
+<div class="card card-halloween" id="halloween-flipclock">
   <h2>🎃 Halloween Countdown</h2>
-  <p id="countdown-text">Loading...</p>
+  <div class="flipclock">
+    <div class="flipcard" id="days">
+      <div class="top">00</div>
+      <div class="bottom">00</div>
+    </div>
+    <div class="flipcard" id="hours">
+      <div class="top">00</div>
+      <div class="bottom">00</div>
+    </div>
+    <div class="flipcard" id="minutes">
+      <div class="top">00</div>
+      <div class="bottom">00</div>
+    </div>
+    <div class="flipcard" id="seconds">
+      <div class="top">00</div>
+      <div class="bottom">00</div>
+    </div>
+  </div>
 </div>
 
+<style>
+/* Flip Clock Styles */
+.flipclock {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: -60px;
+}
+
+.flipcard {
+  background: rgba(0,0,0,0.25);
+  color: #fff;
+  font-weight: 700;
+  font-size: 2rem;
+  width: 60px;
+  height: 90px;
+  border-radius: 8px;
+  perspective: 600px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.flipcard .top,
+.flipcard .bottom {
+  display: block;
+  width: 100%;
+  height: 50%;
+  line-height: 40px;
+  text-align: center;
+  backface-visibility: hidden;
+}
+
+.flipcard .top {
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.1));
+  transform-origin: bottom;
+}
+
+.flipcard .bottom {
+  border-top: 1px solid rgba(255,255,255,0.3);
+  background: linear-gradient(180deg, rgba(0,0,0,0.1), rgba(0,0,0,0.2));
+  transform-origin: top;
+}
+
+.flipcard.flip .top {
+  animation: flipTop 0.5s forwards;
+}
+
+.flipcard.flip .bottom {
+  animation: flipBottom 0.5s forwards;
+}
+
+@keyframes flipTop {
+  0% { transform: rotateX(0deg); }
+  100% { transform: rotateX(-180deg); }
+}
+
+@keyframes flipBottom {
+  0% { transform: rotateX(180deg); }
+  100% { transform: rotateX(0deg); }
+}
+
+/* Label under each unit */
+.flipclock .flipcard::after {
+  content: attr(id);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  color: var(--accent);
+  position: absolute;
+  bottom: -14px;
+  width: 100%;
+  text-align: center;
+}
+</style>
+
 <script>
-// Set target date for Halloween
 const halloweenDate = new Date('October 31, 2025 00:00:00').getTime();
 
-function updateCountdown() {
+function updateFlipClock() {
   const now = new Date().getTime();
-  const distance = halloweenDate - now;
+  let distance = halloweenDate - now;
 
-  if(distance < 0) {
-    document.getElementById('countdown-text').innerHTML = "👻 Happy Halloween!";
+  if(distance < 0){
+    document.querySelector('.flipclock').innerHTML = "👻 Happy Halloween!";
     return;
   }
 
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000*60*60));
+  const days = Math.floor(distance / (1000*60*60*24));
+  const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
   const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
   const seconds = Math.floor((distance % (1000*60)) / 1000);
 
-  document.getElementById('countdown-text').innerHTML =
-    `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  const timeParts = {days, hours, minutes, seconds};
+
+  for(const unit in timeParts){
+    const card = document.getElementById(unit);
+    const newVal = String(timeParts[unit]).padStart(2,'0');
+    const top = card.querySelector('.top').textContent;
+    if(top !== newVal){
+      card.querySelector('.top').textContent = newVal;
+      card.querySelector('.bottom').textContent = newVal;
+      card.classList.remove('flip');
+      void card.offsetWidth; // trigger reflow
+      card.classList.add('flip');
+    }
+  }
 }
 
-// Update every second
-setInterval(updateCountdown, 1000);
-updateCountdown();
+setInterval(updateFlipClock, 1000);
+updateFlipClock();
 </script>
+
+
 
   <!-- 
     MAIN CONTENT 
