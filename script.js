@@ -223,3 +223,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
   window.FamilyHub = { enableHalloween, disableHalloween, toggleHalloween };
 });
+
+  // Disable right-click context menu
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    alert("Right-click is disabled on this page!");
+  });
+
+  // Disable specific key shortcuts
+  document.addEventListener('keydown', function(e) {
+    // F12
+    if (e.key === "F12") e.preventDefault();
+    // Ctrl+Shift+I, Ctrl+Shift+C, Ctrl+Shift+J
+    if (e.ctrlKey && e.shiftKey && ["I","C","J"].includes(e.key)) e.preventDefault();
+    // Ctrl+U (view source)
+    if (e.ctrlKey && e.key === "u") e.preventDefault();
+  });
+
+  // Optional: Warn user if they try to open devtools (experimental)
+  let devtoolsOpen = false;
+  setInterval(function() {
+    const widthThreshold = window.outerWidth - window.innerWidth > 100;
+    const heightThreshold = window.outerHeight - window.innerHeight > 100;
+    if (widthThreshold || heightThreshold) {
+      if (!devtoolsOpen) {
+        devtoolsOpen = true;
+        alert("DevTools detected! Some features may not work.");
+      }
+    } else {
+      devtoolsOpen = false;
+    }
+  }, 1000);
+
