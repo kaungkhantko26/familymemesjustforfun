@@ -8,7 +8,6 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Using the 'Creepster' font for Halloween mode, and 'Quicksand' as the main font -->
   <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
 
   <!-- Font Awesome for icons -->
@@ -16,208 +15,75 @@
 
   <!-- Your CSS file -->
   <link rel="stylesheet" href="style.css" />
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-R6X1L8KYTJ"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-R6X1L8KYTJ');
-</script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1702547212239421"
-crossorigin="anonymous"></script>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-R6X1L8KYTJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-R6X1L8KYTJ');
+  </script>
+
 </head>
-
-<!-- Add 'halloween' class here to test the theme! -->
 <body>
+    <!-- HEADER 
+  <video autoplay muted loop playsinline class="video-bg">
+    <source src="-9129542939632791148-2.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>-->
+  
   <!-- HEADER -->
   <header class="site-header">
     <div class="logo-container">
-      <!-- Using a placeholder logo -->
       <img src="school-logo.png" alt="Logo" class="logo">
       <div class="title-group">
         <h1>FAMILY MEMES JUST FOR FUN</h1>
         <p class="tagline">No Star Is Out Of Reach</p>
       </div>
-    </div>
+</header>
+
   </header>
 
   <!-- NAVIGATION -->
   <nav class="main-nav" role="navigation" aria-label="Main navigation">
     <ul class="container" role="list">
-      <!-- Added icons to all nav items for consistency -->
       <li role="listitem"><a href="index.html" class="active"><i class="fa-solid fa-home fa-fw"></i> Home</a></li>
       <li role="listitem"><a href="aboutus.html"><i class="fa-solid fa-users fa-fw"></i> About Us</a></li>
       <li role="listitem"><a href="contact.html"><i class="fa-solid fa-phone fa-fw"></i> Contact</a></li>
       <li role="listitem"><a href="address.html"><i class="fa-solid fa-map-location-dot fa-fw"></i> Address</a></li>
       <li role="listitem"><a href="news.html"><i class="fa-solid fa-bullhorn fa-fw"></i> News</a></li>
-      <!-- Added a button to toggle the theme -->
     </ul>
   </nav>
-<!-- ---------- Halloween Flip Clock Countdown ---------- -->
-<div class="card card-halloween" id="halloween-flipclock">
-  <h2>🎃 Halloween Countdown</h2>
-  <div class="flipclock">
-    <div class="flipcard" id="days">
-      <div class="top">00</div>
-      <div class="bottom">00</div>
+
+  <!-- FLIP CLOCK 
+  <div class="card card-halloween" id="halloween-flipclock">
+    <h2>🎃 Halloween Countdown</h2>
+    <div class="flipclock">
+      <div class="flipcard" id="days"><div class="top">00</div><div class="bottom">00</div></div>
+      <div class="flipcard" id="hours"><div class="top">00</div><div class="bottom">00</div></div>
+      <div class="flipcard" id="minutes"><div class="top">00</div><div class="bottom">00</div></div>
+      <div class="flipcard" id="seconds"><div class="top">00</div><div class="bottom">00</div></div>
     </div>
-    <div class="flipcard" id="hours">
-      <div class="top">00</div>
-      <div class="bottom">00</div>
-    </div>
-    <div class="flipcard" id="minutes">
-      <div class="top">00</div>
-      <div class="bottom">00</div>
-    </div>
-    <div class="flipcard" id="seconds">
-      <div class="top">00</div>
-      <div class="bottom">00</div>
-    </div>
-  </div>
-</div>
+  </div>-->
 
-<style>
-/* Flip Clock Styles */
-.flipclock {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: -60px;
-}
-
-.flipcard {
-  background: rgba(0,0,0,0.25);
-  color: #fff;
-  font-weight: 700;
-  font-size: 2rem;
-  width: 60px;
-  height: 90px;
-  border-radius: 8px;
-  perspective: 600px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  overflow: hidden;
-}
-
-.flipcard .top,
-.flipcard .bottom {
-  display: block;
-  width: 100%;
-  height: 50%;
-  line-height: 40px;
-  text-align: center;
-  backface-visibility: hidden;
-}
-
-.flipcard .top {
-  border-bottom: 1px solid rgba(255,255,255,0.3);
-  background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.1));
-  transform-origin: bottom;
-}
-
-.flipcard .bottom {
-  border-top: 1px solid rgba(255,255,255,0.3);
-  background: linear-gradient(180deg, rgba(0,0,0,0.1), rgba(0,0,0,0.2));
-  transform-origin: top;
-}
-
-.flipcard.flip .top {
-  animation: flipTop 0.5s forwards;
-}
-
-.flipcard.flip .bottom {
-  animation: flipBottom 0.5s forwards;
-}
-
-@keyframes flipTop {
-  0% { transform: rotateX(0deg); }
-  100% { transform: rotateX(-180deg); }
-}
-
-@keyframes flipBottom {
-  0% { transform: rotateX(180deg); }
-  100% { transform: rotateX(0deg); }
-}
-
-/* Label under each unit */
-.flipclock .flipcard::after {
-  content: attr(id);
-  font-size: 0.6rem;
-  text-transform: uppercase;
-  color: var(--accent);
-  position: absolute;
-  bottom: -14px;
-  width: 100%;
-  text-align: center;
-}
-</style>
-
-<script>
-const halloweenDate = new Date('October 31, 2025 00:00:00').getTime();
-
-function updateFlipClock() {
-  const now = new Date().getTime();
-  let distance = halloweenDate - now;
-
-  if(distance < 0){
-    document.querySelector('.flipclock').innerHTML = "👻 Happy Halloween!";
-    return;
-  }
-
-  const days = Math.floor(distance / (1000*60*60*24));
-  const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
-  const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
-  const seconds = Math.floor((distance % (1000*60)) / 1000);
-
-  const timeParts = {days, hours, minutes, seconds};
-
-  for(const unit in timeParts){
-    const card = document.getElementById(unit);
-    const newVal = String(timeParts[unit]).padStart(2,'0');
-    const top = card.querySelector('.top').textContent;
-    if(top !== newVal){
-      card.querySelector('.top').textContent = newVal;
-      card.querySelector('.bottom').textContent = newVal;
-      card.classList.remove('flip');
-      void card.offsetWidth; // trigger reflow
-      card.classList.add('flip');
-    }
-  }
-}
-
-setInterval(updateFlipClock, 1000);
-updateFlipClock();
-</script>
-
-
+  <!-- MAIN CONTENT -->
   <main class="main-content">
     <div class="card card-halloween">
-      <h2><i class="fa-solid fa-pumpkin"></i> ဟောလဝင်းquiz !</h2>
-      <!-- This is a standard link styled as a button -->
-      <a href="https://quizzory.in/id/68fcc45b1bdac4f7f02f9953" class="btn mt-6" role="button">ဟောလဝင်း ရောက်မှသာပွင့်မည်</a>
+      <h2><i class="fa-solid fa-pumpkin"></i> ပံ့သကူငွေရရှိသူ (၃) ဦး ကြေညာခြင်း</h2>
+      <a href="tasungtine.html" class="btn mt-6" role="button">Click here</a>
+
+
     </div>
-    <div class="card card-halloween">
-      <h2><i class="fa-solid fa-pumpkin"></i> ဟောလဝင်းအကြောင်းတစေ့တစောင်း !</h2>
-      <!-- This is a standard link styled as a button -->
-      <a href="hallo.html" class="btn mt-6" role="button">Click to read</a>
-    </div>
-    <div class="card card-halloween">
-      <h2><i class="fa-solid fa-pumpkin"></i>  သရဲများအကြောင်း !</h2>
-      <!-- This is a standard link styled as a button -->
-      <a href="ghosts.html" class="btn mt-6" role="button">Click to read</a>
-    </div>
+
+    <!-- UPDATED NEWS CARD -->
     <div class="card card-news">
       <h2><i class="fa-solid fa-newspaper"></i> Latest News</h2>
       <ul>
         <li>🏫 Halloween</li>
-        <li>🤝မိသားစုကိုယ်ပိုင်အထက်တန်းကျောင်း (မကွေး) ၏ အာစရိယပူဇော်ပွဲ</li>
-        <li>🤝မိသားစုကိုယ်ပိုင်အထက်တန်းကျောင်း (မလှိုင်) ၏ အာစရိယပူဇော်ပွဲ</li>
+        <li>🤝 မိသားစုကိုယ်ပိုင်အထက်တန်းကျောင်း (မကွေး) ၏ အာစရိယပူဇော်ပွဲ</li>
+        <li>🤝 မိသားစုကိုယ်ပိုင်အထက်တန်းကျောင်း (မလှိုင်) ၏ အာစရိယပူဇော်ပွဲ</li>
       </ul>
-      <!-- Converted to a link (<a> tag) for correct navigation -->
       <a href="news.html" class="btn mt-6" role="button">Click here to Read News</a>
     </div>
 
@@ -225,7 +91,6 @@ updateFlipClock();
       <h2><i class="fa-solid fa-face-laugh-beam"></i> Meme of the Week</h2>
       <div class="meme-content">
         <p>Memes On Facebook</p>
-        <!-- Converted to a link that opens in a new tab -->
         <a href="https://www.facebook.com/share/1BkWVLD1YN/?mibextid=wwXIfr" class="btn mt-6" target="_blank" rel="noopener noreferrer" role="button">Go to Memes</a>
       </div>
     </div>
@@ -233,62 +98,30 @@ updateFlipClock();
     <div class="card card-mailbox">
       <h2><i class="fa-solid fa-envelope"></i> Our Mailbox</h2>
       <p>Send your message directly to the admin team 💌</p>
-      
-      <!-- Changed this button to make sense for the card -->
       <a href="https://emb.fouita.com/widget/0x2bdac8/ftpqw070h" class="btn mt-6" target="_blank" rel="noopener noreferrer" role="button">Send Message</a>
     </div>
-    
+  </main>
 
-    <!-- 
-      This is the simple modal structure from your CSS. 
-      It's hidden by default.
-    -->
-
-  </main> <!-- END of main-content -->
-
-  <!-- 
-    FOOTER SECTION
-    This is NOW OUTSIDE <main> so it's pushed to the bottom.
-  -->
-
-  <footer class="copyright">
+  <!-- FOOTER -->
+  <footer>
     <p>Copyright 2025 © FMJFF All Rights Reserved | Developed by FMJFF</p>
   </footer>
 
-  <!-- Your JavaScript file -->
+  <!-- JS -->
   <script src="script.js"></script>
+
   <script>
-  // Disable right-click context menu
-  document.addEventListener('contextmenu', function(e) {
-    e.preventDefault();
-    alert("Right-click is disabled on this page!");
-  });
 
-  // Disable specific key shortcuts
-  document.addEventListener('keydown', function(e) {
-    // F12
-    if (e.key === "F12") e.preventDefault();
-    // Ctrl+Shift+I, Ctrl+Shift+C, Ctrl+Shift+J
-    if (e.ctrlKey && e.shiftKey && ["I","C","J"].includes(e.key)) e.preventDefault();
-    // Ctrl+U (view source)
-    if (e.ctrlKey && e.key === "u") e.preventDefault();
-  });
+    // Disable right-click & keys
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', e=>{
+      if(e.key==='F12') e.preventDefault();
+      if(e.ctrlKey && e.shiftKey && ['I','C','J'].includes(e.key.toUpperCase())) e.preventDefault();
+      if(e.ctrlKey && e.key.toLowerCase()==='u') e.preventDefault();
+    });
+  </script>
+  <script src="bg.music.js"></script>
 
-  // Optional: Warn user if they try to open devtools (experimental)
-  let devtoolsOpen = false;
-  setInterval(function() {
-    const widthThreshold = window.outerWidth - window.innerWidth > 100;
-    const heightThreshold = window.outerHeight - window.innerHeight > 100;
-    if (widthThreshold || heightThreshold) {
-      if (!devtoolsOpen) {
-        devtoolsOpen = true;
-        alert("DevTools detected! Some features may not work.");
-      }
-    } else {
-      devtoolsOpen = false;
-    }
-  }, 1000);
-</script>
-
+  
 </body>
 </html>
