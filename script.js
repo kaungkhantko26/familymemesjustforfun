@@ -176,4 +176,4 @@
      new MutationObserver(muts=>{if(muts.some(m=>m.addedNodes.length)) wireButtonClicks();}).observe(document.body,{childList:true,subtree:true});
      window.FamilyHub={enableHalloween,disableHalloween,toggleHalloween};
    });
-   
+  
