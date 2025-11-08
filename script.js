@@ -169,3 +169,13 @@ document.querySelectorAll('.card').forEach(card => {
     sparklesContainer.appendChild(sparkle);
   }
 });
+ type="website/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Website",
+  "name": "Family Memes Just For Fun",
+  "url": "https://familymemesjustforfun.site",
+  "description": "Myanmar family memes and fun content.",
+  "author": { "@type": "Person", "name": "Kaung Khant Ko" }
+}
+
