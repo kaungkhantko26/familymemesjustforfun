@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ShareHUB</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      margin: 0;
+      background: #f8fafc;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      padding: 1rem 0;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+    }
+
+    /* Category Selector */
+    .category-select {
+      max-width: 400px;
+      margin: 20px auto;
+      text-align: center;
+    }
+
+    .category-select select {
+      width: 80%;
+      padding: 10px 14px;
+      border: 2px solid #2563eb;
+      border-radius: 10px;
+      font-size: 1rem;
+      color: #2563eb;
+      font-weight: 600;
+      background: white;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .category-select select:hover {
+      background: #eff6ff;
+    }
+
+    #resourceList {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      padding: 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .resource-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 16px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .resource-card:hover { transform: translateY(-4px); }
+
+    .resource-card iframe {
+      width: 100%;
+      height: 180px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    .resource-card h3 {
+      font-size: 1rem;
+      margin-top: 10px;
+      color: #111;
+    }
+
+    footer {
+      background: #111827;
+      color: #fff;
+      text-align: center;
+      padding: 15px 0;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 id="categoryTitle">ShareHub</h1>
+  </header>
+
+  <!-- Category Selector -->
+  <div class="category-select">
+    <select id="categoryDropdown">
+      <option value="general">🌍 General</option>
+      <option value="science">🔬 Science</option>
+      <option value="math">🧮 Math</option>
+      <option value="english">📘 English</option>
+      <option value="technology">💻 Technology</option>
+      <option value="motivation">🌟 Motivation</option>
+    </select>
+  </div>
+
+  <main>
+    <div id="resourceList"></div>
+  </main>
+
+  <footer>
+    <p>© 2025 Sh</p>
+  </footer>
+
+  <!-- ✅ Firebase Script -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-database.js";
+
+    // ✅ Your Firebase Config
+    const firebaseConfig = {
+      apiKey: "AIzaSyAwTcRvvxZxPq5pL9NjlysRaxWweMZW1xg",
+      authDomain: "familymemesjustforfun.firebaseapp.com",
+      databaseURL: "https://familymemesjustforfun-default-rtdb.firebaseio.com",
+      projectId: "familymemesjustforfun",
+      storageBucket: "familymemesjustforfun.firebasestorage.app",
+      messagingSenderId: "1008499682937",
+      appId: "1:1008499682937:web:91bb521214cd1142da6ea8",
+      measurementId: "G-M39GJG5SGL"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const list = document.getElementById("resourceList");
+      const title = document.getElementById("categoryTitle");
+      const dropdown = document.getElementById("categoryDropdown");
+
+      // Load the correct category (from URL or dropdown)
+      const params = new URLSearchParams(window.location.search);
+      const initialCategory = params.get("category") || "general";
+      dropdown.value = initialCategory;
+      title.textContent = `ShareHub Live — ${initialCategory.toUpperCase()}`;
+
+      function loadCategory(category) {
+        title.textContent = `ShareHub — ${category.toUpperCase()}`;
+        const dbRef = ref(db, "resources/" + category);
+        list.innerHTML = "<p>Loading...</p>";
+
+        onValue(dbRef, snapshot => {
+          list.innerHTML = "";
+          if (!snapshot.exists()) {
+            list.innerHTML = "<p>No resources found for this category.</p>";
+            return;
+          }
+
+          snapshot.forEach(child => {
+            const data = child.val();
+            const card = document.createElement("div");
+            card.className = "resource-card";
+
+            if (data.link.includes("youtube.com") || data.link.includes("youtu.be")) {
+              const embedLink = data.link.replace("watch?v=", "embed/");
+              card.innerHTML = `
+                <iframe src="${embedLink}" allowfullscreen></iframe>
+                <h3>${data.title}</h3>
+              `;
+            } else {
+              card.innerHTML = `
+                <a href="${data.link}" target="_blank" class="btn">📘 Open Resource</a>
+                <h3>${data.title}</h3>
+              `;
+            }
+
+            list.prepend(card);
+          });
+        });
+      }
+
+      // Load initial category
+      loadCategory(initialCategory);
+
+      // Change category when user selects from dropdown
+      dropdown.addEventListener("change", e => {
+        const selectedCategory = e.target.value;
+        history.replaceState(null, "", `?category=${selectedCategory}`);
+        loadCategory(selectedCategory);
+      });
+    });
+  </script>
+      <script src="nav.js"></script>
+
+</body>
+</html>
