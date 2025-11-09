@@ -70,24 +70,37 @@
       color: #2563eb;
     }
 
-    .login-box {
+    .login-form {
       text-align: center;
-      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 30px;
     }
 
-    .login-box button {
-      padding: 10px 18px;
+    .login-form input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .login-form button {
       background: #2563eb;
       color: white;
       border: none;
+      padding: 10px 16px;
       border-radius: 8px;
-      font-size: 1rem;
       cursor: pointer;
-      transition: 0.2s ease;
+      font-weight: 600;
     }
 
-    .login-box button:hover {
+    .login-form button:hover {
       background: #1e40af;
+    }
+
+    .hidden {
+      display: none;
     }
 
     form {
@@ -102,54 +115,12 @@
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 1rem;
-      transition: 0.2s ease;
-    }
-
-    select:focus, input:focus {
-      border-color: #2563eb;
-      outline: none;
-      box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
     }
 
     button.submit-btn {
       background: #2563eb;
       color: white;
       font-weight: 600;
-      cursor: pointer;
-    }
-
-    button.submit-btn:hover {
-      background: #1e40af;
-    }
-
-    .resource-list {
-      margin-top: 40px;
-    }
-
-    .resource-card {
-      background: #fff;
-      border-radius: 10px;
-      padding: 14px;
-      margin-bottom: 12px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-    }
-
-    .resource-card h3 {
-      margin: 6px 0;
-      color: #111;
-    }
-
-    .resource-card a {
-      color: #2563eb;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .resource-card iframe {
-      width: 100%;
-      height: 180px;
-      border-radius: 8px;
-      border: none;
     }
 
     footer {
@@ -172,13 +143,18 @@
   </header>
 
   <main>
-    <div class="login-box" id="loginBox">
+    <!-- LOGIN FORM -->
+    <div id="loginSection">
       <h2><i class="fa-solid fa-lock"></i> Admin Login</h2>
-      <p>Please log in to upload new resources.</p>
-      <button id="loginBtn"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+      <form class="login-form" id="loginForm">
+        <input type="email" id="email" placeholder="Admin Email" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <button type="submit"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+      </form>
     </div>
 
-    <div id="uploadSection" style="display:none;">
+    <!-- UPLOAD SECTION -->
+    <div id="uploadSection" class="hidden">
       <h2><i class="fa-solid fa-cloud-arrow-up"></i> Add New Resource</h2>
       <form id="addForm">
         <label>Category</label>
@@ -199,10 +175,6 @@
 
         <button type="submit" class="submit-btn">Add Link</button>
       </form>
-
-      <div class="resource-list" id="resourceList">
-        <h2><i class="fa-solid fa-bolt"></i> Live Preview (Realtime)</h2>
-      </div>
     </div>
   </main>
 
@@ -210,18 +182,18 @@
     <p>© 2025 ShareHub | Developed by Kaung Khant Ko</p>
   </footer>
 
-  <!-- Firebase Secure Admin Setup -->
+  <!-- ✅ Firebase Setup -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
-    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-database.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+    import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyAwTcRvvxZxPq5pL9NjlysRaxWweMZW1xg",
       authDomain: "familymemesjustforfun.firebaseapp.com",
       databaseURL: "https://familymemesjustforfun-default-rtdb.firebaseio.com",
       projectId: "familymemesjustforfun",
-      storageBucket: "familymemesjustforfun.firebasestorage.app",
+      storageBucket: "familymemesjustforfun.appspot.com",
       messagingSenderId: "1008499682937",
       appId: "1:1008499682937:web:91bb521214cd1142da6ea8",
       measurementId: "G-M39GJG5SGL"
@@ -231,92 +203,54 @@
     const auth = getAuth(app);
     const db = getDatabase(app);
 
-    const loginBox = document.getElementById("loginBox");
+    const loginSection = document.getElementById("loginSection");
     const uploadSection = document.getElementById("uploadSection");
-    const loginBtn = document.getElementById("loginBtn");
-    const form = document.getElementById("addForm");
-    const list = document.getElementById("resourceList");
+    const loginForm = document.getElementById("loginForm");
+    const addForm = document.getElementById("addForm");
 
-    loginBtn.addEventListener("click", () => {
-      const email = prompt("Enter admin email:");
-      const password = prompt("Enter password:");
+    // 🔐 LOGIN
+    loginForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
       signInWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          alert("✅ Logged in successfully!");
-        })
-        .catch(err => {
-          alert("❌ Login failed: " + err.message);
-          console.error("Firebase Auth error", err);
-        });
+        .then(() => alert("✅ Login successful!"))
+        .catch(err => alert("❌ Login failed: " + err.message));
     });
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        loginBox.style.display = "none";
-        uploadSection.style.display = "block";
+        loginSection.classList.add("hidden");
+        uploadSection.classList.remove("hidden");
       } else {
-        loginBox.style.display = "block";
-        uploadSection.style.display = "none";
+        loginSection.classList.remove("hidden");
+        uploadSection.classList.add("hidden");
       }
     });
 
-    form.addEventListener("submit", (e) => {
+    // 🧩 Upload Resource
+    addForm.addEventListener("submit", (e) => {
       e.preventDefault();
       const user = auth.currentUser;
-      if (!user) {
-        return alert("⚠️ You must be logged in to upload.");
-      }
+      if (!user) return alert("⚠️ Please login first!");
 
-      const category = form.category.value;
-      const title = form.title.value.trim();
-      const link = form.link.value.trim();
+      const category = addForm.category.value;
+      const title = addForm.title.value.trim();
+      const link = addForm.link.value.trim();
 
-      if (!title || !link) {
-        return alert("Please fill out all fields.");
-      }
+      if (!title || !link) return alert("Please fill out all fields.");
 
-      push(ref(db, `resources/${category}`), {
+      push(ref(db, "resources/" + category), {
         title,
         link,
-        timestamp: Date.now(),
-        addedBy: user.email
+        addedBy: user.email,
+        timestamp: Date.now()
       })
       .then(() => {
         alert("✅ Resource added successfully!");
-        form.reset();
+        addForm.reset();
       })
-      .catch(err => {
-        alert("❌ Error: " + err.message);
-        console.error("Database push error", err);
-      });
-    });
-
-    // Live preview (shows 'general' by default)
-    const liveRef = ref(db, 'resources/general');
-    onValue(liveRef, snapshot => {
-      list.innerHTML = '<h2><i class="fa-solid fa-bolt"></i> Live Preview (Realtime)</h2>';
-      if (!snapshot.exists()) {
-        list.innerHTML += '<p>No resources yet.</p>';
-        return;
-      }
-      snapshot.forEach(child => {
-        const data = child.val();
-        const card = document.createElement('div');
-        card.className = 'resource-card';
-
-        if (data.link.includes('youtube.com') || data.link.includes('youtu.be')) {
-          const embedLink = data.link.replace('watch?v=', 'embed/');
-          card.innerHTML = `
-            <iframe src="${embedLink}" allowfullscreen></iframe>
-            <h3>${data.title}</h3>
-          `;
-        } else {
-          card.innerHTML = `
-            <a href="${data.link}" target="_blank">📘 ${data.title}</a>
-          `;
-        }
-        list.prepend(card);
-      });
+      .catch(err => alert("❌ Upload error: " + err.message));
     });
   </script>
 </body>
