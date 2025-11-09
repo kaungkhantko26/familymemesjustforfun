@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ShareHub | Secure Admin Upload</title>
 
-  <!-- Google Fonts & Font Awesome -->
+  <!-- Google Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
@@ -17,37 +17,43 @@
       margin: 0;
       background: #f8fafc;
     }
+
     header {
       background: #2563eb;
       color: white;
-      padding: 1rem 0.8rem;
+      padding: 1.5rem 0;
       text-align: center;
-      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
+
     header h1 {
       margin: 0;
       font-size: 1.8rem;
     }
 
-    /* 🏠 Home button */
     .home-btn {
-      position: absolute;
-      left: 1rem;
-      top: 0.8rem;
       background: #1e40af;
       color: white;
-      padding: 8px 16px;
-      border-radius: 8px;
+      padding: 10px 22px;
+      border-radius: 10px;
       text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 600;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 6px;
-      transition: background 0.2s ease;
+      gap: 8px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+      transition: all 0.25s ease;
     }
+
     .home-btn:hover {
       background: #3b82f6;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 10px rgba(0,0,0,0.25);
     }
 
     main {
@@ -59,8 +65,16 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
-    h2 { text-align: center; color: #2563eb; }
-    .login-box { text-align: center; padding: 40px 20px; }
+    h2 {
+      text-align: center;
+      color: #2563eb;
+    }
+
+    .login-box {
+      text-align: center;
+      padding: 40px 20px;
+    }
+
     .login-box button {
       padding: 10px 18px;
       background: #2563eb;
@@ -71,7 +85,10 @@
       cursor: pointer;
       transition: 0.2s ease;
     }
-    .login-box button:hover { background: #1e40af; }
+
+    .login-box button:hover {
+      background: #1e40af;
+    }
 
     form {
       display: flex;
@@ -79,6 +96,7 @@
       gap: 15px;
       margin-top: 20px;
     }
+
     select, input, button {
       padding: 10px 14px;
       border: 1px solid #ccc;
@@ -86,20 +104,28 @@
       font-size: 1rem;
       transition: 0.2s ease;
     }
+
     select:focus, input:focus {
       border-color: #2563eb;
       outline: none;
       box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
     }
+
     button.submit-btn {
       background: #2563eb;
       color: white;
       font-weight: 600;
       cursor: pointer;
     }
-    button.submit-btn:hover { background: #1e40af; }
 
-    .resource-list { margin-top: 40px; }
+    button.submit-btn:hover {
+      background: #1e40af;
+    }
+
+    .resource-list {
+      margin-top: 40px;
+    }
+
     .resource-card {
       background: #fff;
       border-radius: 10px;
@@ -107,18 +133,25 @@
       margin-bottom: 12px;
       box-shadow: 0 3px 8px rgba(0,0,0,0.05);
     }
-    .resource-card h3 { margin: 6px 0; color: #111; }
+
+    .resource-card h3 {
+      margin: 6px 0;
+      color: #111;
+    }
+
     .resource-card a {
       color: #2563eb;
       text-decoration: none;
       font-weight: 600;
     }
+
     .resource-card iframe {
       width: 100%;
       height: 180px;
       border-radius: 8px;
       border: none;
     }
+
     footer {
       background: #111827;
       color: #fff;
@@ -131,55 +164,160 @@
 </head>
 
 <body>
-    <header>
-        <h1>ShareHub Secure Admin</h1>
-        <a href="index.html" class="home-btn">
-          <i class="fa-solid fa-house"></i> Back to Home
-        </a>
-      </header>
-      
-      <style>
-        header {
-          background: #2563eb;
-          color: white;
-          padding: 1.5rem 0;
-          text-align: center;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-        }
-      
-        header h1 {
-          margin: 0;
-          font-size: 1.8rem;
-        }
-      
-        /* 🏠 Centered Home Button */
-        .home-btn {
-          background: #1e40af;
-          color: white;
-          padding: 10px 22px;
-          border-radius: 10px;
-          text-decoration: none;
-          font-size: 1rem;
-          font-weight: 600;
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-          transition: all 0.25s ease;
-        }
-      
-        .home-btn:hover {
-          background: #3b82f6;
-          transform: translateY(-2px);
-          box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
-        }
-      </style>
-      
+  <header>
+    <h1>ShareHub Secure Admin</h1>
+    <a href="index.html" class="home-btn">
+      <i class="fa-solid fa-house"></i> Back to Home
+    </a>
   </header>
 
-  <!-- Rest of your Firebase login + upload content goes here -->
-  <!-- (Your working secure uploader script and form remain unchanged) -->
+  <main>
+    <div class="login-box" id="loginBox">
+      <h2><i class="fa-solid fa-lock"></i> Admin Login</h2>
+      <p>Please log in to upload new resources.</p>
+      <button id="loginBtn"><i class="fa-solid fa-right-to-bracket"></i> Login</button>
+    </div>
+
+    <div id="uploadSection" style="display:none;">
+      <h2><i class="fa-solid fa-cloud-arrow-up"></i> Add New Resource</h2>
+      <form id="addForm">
+        <label>Category</label>
+        <select name="category" required>
+          <option value="general">🌍 General</option>
+          <option value="science">🔬 Science</option>
+          <option value="math">🧮 Math</option>
+          <option value="english">📘 English</option>
+          <option value="technology">💻 Technology</option>
+          <option value="motivation">🌟 Motivation</option>
+        </select>
+
+        <label>Title</label>
+        <input type="text" name="title" placeholder="e.g. Basic Physics Lecture" required />
+
+        <label>Link</label>
+        <input type="url" name="link" placeholder="Paste YouTube or PDF link" required />
+
+        <button type="submit" class="submit-btn">Add Link</button>
+      </form>
+
+      <div class="resource-list" id="resourceList">
+        <h2><i class="fa-solid fa-bolt"></i> Live Preview (Realtime)</h2>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 ShareHub | Developed by Kaung Khant Ko</p>
+  </footer>
+
+  <!-- Firebase Secure Admin Setup -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAwTcRvvxZxPq5pL9NjlysRaxWweMZW1xg",
+      authDomain: "familymemesjustforfun.firebaseapp.com",
+      databaseURL: "https://familymemesjustforfun-default-rtdb.firebaseio.com",
+      projectId: "familymemesjustforfun",
+      storageBucket: "familymemesjustforfun.firebasestorage.app",
+      messagingSenderId: "1008499682937",
+      appId: "1:1008499682937:web:91bb521214cd1142da6ea8",
+      measurementId: "G-M39GJG5SGL"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    const loginBox = document.getElementById("loginBox");
+    const uploadSection = document.getElementById("uploadSection");
+    const loginBtn = document.getElementById("loginBtn");
+    const form = document.getElementById("addForm");
+    const list = document.getElementById("resourceList");
+
+    loginBtn.addEventListener("click", () => {
+      const email = prompt("Enter admin email:");
+      const password = prompt("Enter password:");
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          alert("✅ Logged in successfully!");
+        })
+        .catch(err => {
+          alert("❌ Login failed: " + err.message);
+          console.error("Firebase Auth error", err);
+        });
+    });
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        loginBox.style.display = "none";
+        uploadSection.style.display = "block";
+      } else {
+        loginBox.style.display = "block";
+        uploadSection.style.display = "none";
+      }
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const user = auth.currentUser;
+      if (!user) {
+        return alert("⚠️ You must be logged in to upload.");
+      }
+
+      const category = form.category.value;
+      const title = form.title.value.trim();
+      const link = form.link.value.trim();
+
+      if (!title || !link) {
+        return alert("Please fill out all fields.");
+      }
+
+      push(ref(db, `resources/${category}`), {
+        title,
+        link,
+        timestamp: Date.now(),
+        addedBy: user.email
+      })
+      .then(() => {
+        alert("✅ Resource added successfully!");
+        form.reset();
+      })
+      .catch(err => {
+        alert("❌ Error: " + err.message);
+        console.error("Database push error", err);
+      });
+    });
+
+    // Live preview (shows 'general' by default)
+    const liveRef = ref(db, 'resources/general');
+    onValue(liveRef, snapshot => {
+      list.innerHTML = '<h2><i class="fa-solid fa-bolt"></i> Live Preview (Realtime)</h2>';
+      if (!snapshot.exists()) {
+        list.innerHTML += '<p>No resources yet.</p>';
+        return;
+      }
+      snapshot.forEach(child => {
+        const data = child.val();
+        const card = document.createElement('div');
+        card.className = 'resource-card';
+
+        if (data.link.includes('youtube.com') || data.link.includes('youtu.be')) {
+          const embedLink = data.link.replace('watch?v=', 'embed/');
+          card.innerHTML = `
+            <iframe src="${embedLink}" allowfullscreen></iframe>
+            <h3>${data.title}</h3>
+          `;
+        } else {
+          card.innerHTML = `
+            <a href="${data.link}" target="_blank">📘 ${data.title}</a>
+          `;
+        }
+        list.prepend(card);
+      });
+    });
+  </script>
+</body>
+</html>
