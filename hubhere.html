@@ -99,9 +99,54 @@
 </head>
 
 <body>
-  <header>
-    <h1 id="categoryTitle">ShareHub</h1>
-  </header>
+    <header>
+        <h1 id="categoryTitle">ShareHub Live</h1>
+        <a href="index.html" class="home-btn">
+          <i class="fa-solid fa-house"></i> Back to Home
+        </a>
+      </header>
+      
+      <style>
+        header {
+          background: #2563eb;
+          color: white;
+          padding: 1.5rem 0;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+        }
+      
+        header h1 {
+          margin: 0;
+          font-size: 1.8rem;
+        }
+      
+        /* 🏠 Centered Home Button */
+        .home-btn {
+          background: #1e40af;
+          color: white;
+          padding: 10px 22px;
+          border-radius: 10px;
+          text-decoration: none;
+          font-size: 1rem;
+          font-weight: 600;
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+          transition: all 0.25s ease;
+        }
+      
+        .home-btn:hover {
+          background: #3b82f6;
+          transform: translateY(-2px);
+          box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
+        }
+      </style>
+      
 
   <!-- Category Selector -->
   <div class="category-select">
@@ -119,9 +164,11 @@
     <div id="resourceList"></div>
   </main>
 
-  <footer>
-    <p>© 2025 Sh</p>
-  </footer>
+  <!-- FOOTER -->
+  <footer class="copyright">
+    <footer class="copyright" role="contentinfo">
+        <p>Copyright 2025 © FMJFF All Rights Reserved | Developed by FMJFF</p>
+        </footer>
 
   <!-- ✅ Firebase Script -->
   <script type="module">
@@ -201,6 +248,7 @@
     });
   </script>
       <script src="nav.js"></script>
+      
 
 </body>
 </html>
