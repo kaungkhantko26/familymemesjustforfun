@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ShareHUB</title>
+  <title>ShareHUB | Live Learning Hub</title>
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,14 +21,40 @@
     header {
       background: #2563eb;
       color: white;
-      padding: 1rem 0;
+      padding: 1.5rem 0;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
 
     header h1 {
       margin: 0;
       font-size: 1.8rem;
-      letter-spacing: 1px;
+    }
+
+    /* 🏠 Home Button */
+    .home-btn {
+      background: #1e40af;
+      color: white;
+      padding: 10px 22px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      transition: all 0.25s ease;
+    }
+
+    .home-btn:hover {
+      background: #3b82f6;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
     }
 
     /* Category Selector */
@@ -55,6 +81,7 @@
       background: #eff6ff;
     }
 
+    /* Resource Cards */
     #resourceList {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -99,54 +126,17 @@
 </head>
 
 <body>
-    <header>
-        <h1 id="categoryTitle">ShareHub Live</h1>
-        <a href="index.html" class="home-btn">
-          <i class="fa-solid fa-house"></i> Back to Home
-        </a>
-      </header>
-      
-      <style>
-        header {
-          background: #2563eb;
-          color: white;
-          padding: 1.5rem 0;
-          text-align: center;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-        }
-      
-        header h1 {
-          margin: 0;
-          font-size: 1.8rem;
-        }
-      
-        /* 🏠 Centered Home Button */
-        .home-btn {
-          background: #1e40af;
-          color: white;
-          padding: 10px 22px;
-          border-radius: 10px;
-          text-decoration: none;
-          font-size: 1rem;
-          font-weight: 600;
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-          transition: all 0.25s ease;
-        }
-      
-        .home-btn:hover {
-          background: #3b82f6;
-          transform: translateY(-2px);
-          box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
-        }
-      </style>
-      
+  <header>
+    <h1 id="categoryTitle">ShareHub Live</h1>
+    <a href="index.html" class="home-btn">
+      <i class="fa-solid fa-house"></i> Back to Home
+    </a>
+  </header>
+
+  <!-- Info -->
+  <section style="text-align:center; max-width:700px; margin:20px auto; color:#333;">
+    <p>Explore a collection of helpful resources. All links on this page are neatly categorized for your convenience and continuous learning.</p>
+  </section>
 
   <!-- Category Selector -->
   <div class="category-select">
@@ -160,21 +150,21 @@
     </select>
   </div>
 
+  <!-- Resource List -->
   <main>
     <div id="resourceList"></div>
   </main>
 
-  <!-- FOOTER -->
-  <footer class="copyright">
-    <footer class="copyright" role="contentinfo">
-        <p>Copyright 2025 © FMJFF All Rights Reserved | Developed by FMJFF</p>
-        </footer>
+  <!-- Footer -->
+  <footer>
+    <p>Copyright 2025 © FMJFF All Rights Reserved | Developed by FMJFF</p>
+  </footer>
 
   <!-- ✅ Firebase Script -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
     import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
-  
+
     const firebaseConfig = {
       apiKey: "AIzaSyAwTcRvvxZxPq5pL9NjlysRaxWweMZW1xg",
       authDomain: "familymemesjustforfun.firebaseapp.com",
@@ -184,59 +174,54 @@
       messagingSenderId: "1008499682937",
       appId: "1:1008499682937:web:91bb521214cd1142da6ea8"
     };
-  
+
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
-  
-    const categorySelect = document.getElementById("categorySelect");
+
+    const dropdown = document.getElementById("categoryDropdown");
     const list = document.getElementById("resourceList");
-  
-    function load(cat) {
+
+    function loadCategory(category) {
       list.innerHTML = "<p>Loading...</p>";
-      const catRef = ref(db, "resources/" + cat);
-      onValue(catRef, (snapshot) => {
+      const categoryRef = ref(db, "resources/" + category);
+      
+      onValue(categoryRef, (snapshot) => {
         if (!snapshot.exists()) {
-          list.innerHTML = "<p>No resources available in this category.</p>";
+          list.innerHTML = "<p>No resources found in this category.</p>";
           return;
         }
-  
+
         list.innerHTML = "";
         snapshot.forEach(item => {
           const data = item.val();
           const card = document.createElement("div");
-          card.className = "card";
-  
-          // 🎬 If it's a YouTube link → show embedded video
+          card.className = "resource-card";
+
           if (data.link.includes("youtube.com") || data.link.includes("youtu.be")) {
             const embed = data.link
               .replace("watch?v=", "embed/")
               .replace("youtu.be/", "www.youtube.com/embed/");
             card.innerHTML = `
-              <iframe width="100%" height="200" src="${embed}" allowfullscreen></iframe>
-              <p><strong>${data.title}</strong></p>
+              <iframe src="${embed}" allowfullscreen></iframe>
+              <h3>${data.title}</h3>
             `;
-          }
-          // 📘 Otherwise → make clickable link
-          else {
+          } else {
             card.innerHTML = `
-              <p><strong>${data.title}</strong></p>
-              <p><a href="${data.link}" target="_blank" rel="noopener noreferrer">
-                ${data.link.startsWith("http") ? "📘 Open Resource" : "📄 " + data.link}
+              <h3>${data.title}</h3>
+              <p><a href="${data.link}" target="_blank" rel="noopener noreferrer" style="color:#2563eb; font-weight:600; text-decoration:none;">
+                📘 Open Resource
               </a></p>
             `;
           }
-  
+
           list.prepend(card);
         });
       });
     }
-  
-    // Default category
-    load("general");
-    categorySelect.addEventListener("change", e => load(e.target.value));
-  </script>
-        <script src="nav.js"></script>
-      
 
+    // Default
+    loadCategory("general");
+    dropdown.addEventListener("change", e => loadCategory(e.target.value));
+  </script>
 </body>
 </html>
