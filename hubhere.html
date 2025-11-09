@@ -172,82 +172,70 @@
 
   <!-- ✅ Firebase Script -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
-    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-database.js";
-
-    // ✅ Your Firebase Config
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+    import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+  
     const firebaseConfig = {
       apiKey: "AIzaSyAwTcRvvxZxPq5pL9NjlysRaxWweMZW1xg",
       authDomain: "familymemesjustforfun.firebaseapp.com",
       databaseURL: "https://familymemesjustforfun-default-rtdb.firebaseio.com",
       projectId: "familymemesjustforfun",
-      storageBucket: "familymemesjustforfun.firebasestorage.app",
+      storageBucket: "familymemesjustforfun.appspot.com",
       messagingSenderId: "1008499682937",
-      appId: "1:1008499682937:web:91bb521214cd1142da6ea8",
-      measurementId: "G-M39GJG5SGL"
+      appId: "1:1008499682937:web:91bb521214cd1142da6ea8"
     };
-
+  
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const list = document.getElementById("resourceList");
-      const title = document.getElementById("categoryTitle");
-      const dropdown = document.getElementById("categoryDropdown");
-
-      // Load the correct category (from URL or dropdown)
-      const params = new URLSearchParams(window.location.search);
-      const initialCategory = params.get("category") || "general";
-      dropdown.value = initialCategory;
-      title.textContent = `ShareHub Live — ${initialCategory.toUpperCase()}`;
-
-      function loadCategory(category) {
-        title.textContent = `ShareHub — ${category.toUpperCase()}`;
-        const dbRef = ref(db, "resources/" + category);
-        list.innerHTML = "<p>Loading...</p>";
-
-        onValue(dbRef, snapshot => {
-          list.innerHTML = "";
-          if (!snapshot.exists()) {
-            list.innerHTML = "<p>No resources found for this category.</p>";
-            return;
+  
+    const categorySelect = document.getElementById("categorySelect");
+    const list = document.getElementById("resourceList");
+  
+    function load(cat) {
+      list.innerHTML = "<p>Loading...</p>";
+      const catRef = ref(db, "resources/" + cat);
+      onValue(catRef, (snapshot) => {
+        if (!snapshot.exists()) {
+          list.innerHTML = "<p>No resources available in this category.</p>";
+          return;
+        }
+  
+        list.innerHTML = "";
+        snapshot.forEach(item => {
+          const data = item.val();
+          const card = document.createElement("div");
+          card.className = "card";
+  
+          // 🎬 If it's a YouTube link → show embedded video
+          if (data.link.includes("youtube.com") || data.link.includes("youtu.be")) {
+            const embed = data.link
+              .replace("watch?v=", "embed/")
+              .replace("youtu.be/", "www.youtube.com/embed/");
+            card.innerHTML = `
+              <iframe width="100%" height="200" src="${embed}" allowfullscreen></iframe>
+              <p><strong>${data.title}</strong></p>
+            `;
           }
-
-          snapshot.forEach(child => {
-            const data = child.val();
-            const card = document.createElement("div");
-            card.className = "resource-card";
-
-            if (data.link.includes("youtube.com") || data.link.includes("youtu.be")) {
-              const embedLink = data.link.replace("watch?v=", "embed/");
-              card.innerHTML = `
-                <iframe src="${embedLink}" allowfullscreen></iframe>
-                <h3>${data.title}</h3>
-              `;
-            } else {
-              card.innerHTML = `
-                <a href="${data.link}" target="_blank" class="btn">📘 Open Resource</a>
-                <h3>${data.title}</h3>
-              `;
-            }
-
-            list.prepend(card);
-          });
+          // 📘 Otherwise → make clickable link
+          else {
+            card.innerHTML = `
+              <p><strong>${data.title}</strong></p>
+              <p><a href="${data.link}" target="_blank" rel="noopener noreferrer">
+                ${data.link.startsWith("http") ? "📘 Open Resource" : "📄 " + data.link}
+              </a></p>
+            `;
+          }
+  
+          list.prepend(card);
         });
-      }
-
-      // Load initial category
-      loadCategory(initialCategory);
-
-      // Change category when user selects from dropdown
-      dropdown.addEventListener("change", e => {
-        const selectedCategory = e.target.value;
-        history.replaceState(null, "", `?category=${selectedCategory}`);
-        loadCategory(selectedCategory);
       });
-    });
+    }
+  
+    // Default category
+    load("general");
+    categorySelect.addEventListener("change", e => load(e.target.value));
   </script>
-      <script src="nav.js"></script>
+        <script src="nav.js"></script>
       
 
 </body>
