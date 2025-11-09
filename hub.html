@@ -17,113 +17,187 @@
       margin: 0;
       background: #f8fafc;
     }
+
     header {
       background: #2563eb;
       color: white;
-      padding: 1rem 0.8rem;
+      padding: 1.5rem 0;
       text-align: center;
-      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
+
     header h1 {
       margin: 0;
       font-size: 1.8rem;
     }
 
-    /* 🏠 Home button */
     .home-btn {
-      position: absolute;
-      left: 1rem;
-      top: 0.8rem;
       background: #1e40af;
       color: white;
-      padding: 8px 16px;
-      border-radius: 8px;
+      padding: 10px 22px;
+      border-radius: 10px;
       text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 600;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 6px;
-      transition: background 0.2s ease;
+      gap: 8px;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+      transition: all 0.25s ease;
     }
+
     .home-btn:hover {
       background: #3b82f6;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
     }
 
     main {
-      max-width: 700px;
+      max-width: 900px;
       margin: 30px auto;
       background: white;
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
     }
 
-    h2 { text-align: center; color: #2563eb; }
-    .login-box { text-align: center; padding: 40px 20px; }
+    h2 {
+      text-align: center;
+      color: #2563eb;
+      margin-bottom: 10px;
+    }
+
+    .login-box {
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .login-box input {
+      width: 100%;
+      max-width: 320px;
+      padding: 12px 14px;
+      border: 1px solid #cbd5f5;
+      border-radius: 10px;
+      margin: 10px auto;
+      font-size: 1rem;
+      display: block;
+    }
+
     .login-box button {
-      padding: 10px 18px;
+      padding: 12px 28px;
       background: #2563eb;
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 1rem;
       cursor: pointer;
       transition: 0.2s ease;
+      font-weight: 600;
     }
-    .login-box button:hover { background: #1e40af; }
+
+    .login-box button:hover {
+      background: #1e40af;
+    }
 
     form {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 18px;
       margin-top: 20px;
     }
-    select, input, button {
-      padding: 10px 14px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+
+    select,
+    input,
+    textarea,
+    button {
+      padding: 12px 14px;
+      border: 1px solid #cbd5f5;
+      border-radius: 10px;
       font-size: 1rem;
       transition: 0.2s ease;
     }
-    select:focus, input:focus {
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    select:focus,
+    input:focus,
+    textarea:focus {
       border-color: #2563eb;
       outline: none;
-      box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
     }
+
     button.submit-btn {
       background: #2563eb;
       color: white;
       font-weight: 600;
       cursor: pointer;
+      border: none;
     }
-    button.submit-btn:hover { background: #1e40af; }
 
-    .resource-list { margin-top: 40px; }
+    button.submit-btn:hover {
+      background: #1e40af;
+    }
+
+    .admin-panel {
+      display: none;
+    }
+
+    .resource-list {
+      margin-top: 40px;
+    }
+
     .resource-card {
       background: #fff;
-      border-radius: 10px;
-      padding: 14px;
-      margin-bottom: 12px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
     }
-    .resource-card h3 { margin: 6px 0; color: #111; }
+
+    .resource-card h3 {
+      margin: 6px 0;
+      color: #111827;
+    }
+
+    .resource-card p {
+      margin: 0;
+      color: #4b5563;
+      font-size: 0.95rem;
+    }
+
     .resource-card a {
       color: #2563eb;
       text-decoration: none;
       font-weight: 600;
     }
-    .resource-card iframe {
-      width: 100%;
-      height: 180px;
-      border-radius: 8px;
-      border: none;
+
+    .status-message {
+      text-align: center;
+      margin-top: 15px;
+      font-weight: 600;
     }
+
+    .status-message.success {
+      color: #16a34a;
+    }
+
+    .status-message.error {
+      color: #dc2626;
+    }
+
     footer {
       background: #111827;
       color: #fff;
       text-align: center;
-      padding: 12px 0;
+      padding: 14px 0;
       margin-top: 40px;
       font-size: 0.9rem;
     }
@@ -131,55 +205,229 @@
 </head>
 
 <body>
-    <header>
-        <h1>ShareHub Secure Admin</h1>
-        <a href="index.html" class="home-btn">
-          <i class="fa-solid fa-house"></i> Back to Home
-        </a>
-      </header>
-      
-      <style>
-        header {
-          background: #2563eb;
-          color: white;
-          padding: 1.5rem 0;
-          text-align: center;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-        }
-      
-        header h1 {
-          margin: 0;
-          font-size: 1.8rem;
-        }
-      
-        /* 🏠 Centered Home Button */
-        .home-btn {
-          background: #1e40af;
-          color: white;
-          padding: 10px 22px;
-          border-radius: 10px;
-          text-decoration: none;
-          font-size: 1rem;
-          font-weight: 600;
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-          transition: all 0.25s ease;
-        }
-      
-        .home-btn:hover {
-          background: #3b82f6;
-          transform: translateY(-2px);
-          box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25);
-        }
-      </style>
-      
+  <header>
+    <h1>ShareHub Secure Admin</h1>
+    <a href="index.html" class="home-btn">
+      <i class="fa-solid fa-house"></i>
+      Back to Home
+    </a>
   </header>
 
-  <!-- Rest of your Firebase login + upload content goes here -->
-  <!-- (Your working secure uploader script and form remain unchanged) -->
+  <main>
+    <section id="loginSection" class="login-box">
+      <h2><i class="fa-solid fa-user-lock"></i> Admin Login</h2>
+      <p>Sign in with your admin credentials to manage ShareHub resources.</p>
+      <input type="email" id="adminEmail" placeholder="Admin email" autocomplete="username" required />
+      <input type="password" id="adminPassword" placeholder="Password" autocomplete="current-password" required />
+      <button id="loginBtn"><i class="fa-solid fa-right-to-bracket"></i> Sign In</button>
+      <p id="loginStatus" class="status-message" aria-live="polite"></p>
+    </section>
+
+    <section id="adminPanel" class="admin-panel">
+      <h2><i class="fa-solid fa-cloud-arrow-up"></i> Upload New Resource</h2>
+      <form id="uploadForm">
+        <label>
+          Category
+          <select id="resourceCategory" required>
+            <option value="general">🌍 General</option>
+            <option value="science">🔬 Science</option>
+            <option value="math">🧮 Math</option>
+            <option value="english">📘 English</option>
+            <option value="technology">💻 Technology</option>
+            <option value="motivation">🌟 Motivation</option>
+          </select>
+        </label>
+        <label>
+          Title
+          <input type="text" id="resourceTitle" placeholder="Resource title" required />
+        </label>
+        <label>
+          Description (optional)
+          <textarea id="resourceDescription" placeholder="Brief description for students"></textarea>
+        </label>
+        <label>
+          Link or Embed URL
+          <input type="url" id="resourceLink" placeholder="https://example.com" required />
+        </label>
+        <button type="submit" class="submit-btn"><i class="fa-solid fa-paper-plane"></i> Publish Resource</button>
+        <p id="formStatus" class="status-message" aria-live="polite"></p>
+      </form>
+
+      <div class="resource-list">
+        <h2><i class="fa-solid fa-list"></i> Latest Uploads</h2>
+        <div id="recentResources"></div>
+      </div>
+
+      <button id="logoutBtn" class="submit-btn" style="margin-top: 30px; background: #dc2626;">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i> Log out
+      </button>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 ShareHub Secure Admin | FamilyMemesJustForFun</p>
+  </footer>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-auth.js";
+    import { getDatabase, ref, push, serverTimestamp, query, limitToLast, onValue } from "https://www.gstatic.com/firebasejs/12.5.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAwTcRvvxZxPq5pL9NjlysRaxWweMZW1xg",
+      authDomain: "familymemesjustforfun.firebaseapp.com",
+      databaseURL: "https://familymemesjustforfun-default-rtdb.firebaseio.com",
+      projectId: "familymemesjustforfun",
+      storageBucket: "familymemesjustforfun.firebasestorage.app",
+      messagingSenderId: "1008499682937",
+      appId: "1:1008499682937:web:91bb521214cd1142da6ea8",
+      measurementId: "G-M39GJG5SGL"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    const loginSection = document.getElementById('loginSection');
+    const adminPanel = document.getElementById('adminPanel');
+    const loginBtn = document.getElementById('loginBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const loginStatus = document.getElementById('loginStatus');
+    const formStatus = document.getElementById('formStatus');
+    const uploadForm = document.getElementById('uploadForm');
+    const recentResources = document.getElementById('recentResources');
+    let detachRecentListener = null;
+
+    const toggleUI = (loggedIn) => {
+      if (loggedIn) {
+        loginSection.style.display = 'none';
+        adminPanel.style.display = 'block';
+        loginStatus.textContent = '';
+      } else {
+        loginSection.style.display = 'block';
+        adminPanel.style.display = 'none';
+      }
+    };
+
+    onAuthStateChanged(auth, (user) => {
+      toggleUI(!!user);
+      if (user) {
+        loadRecentResources();
+      } else {
+        if (detachRecentListener) {
+          detachRecentListener();
+          detachRecentListener = null;
+        }
+        recentResources.innerHTML = '';
+      }
+    });
+
+    loginBtn.addEventListener('click', async () => {
+      const email = document.getElementById('adminEmail').value.trim();
+      const password = document.getElementById('adminPassword').value;
+
+      if (!email || !password) {
+        loginStatus.textContent = 'Please enter both email and password.';
+        loginStatus.className = 'status-message error';
+        return;
+      }
+
+      loginBtn.disabled = true;
+      loginStatus.textContent = 'Signing in…';
+      loginStatus.className = 'status-message';
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        loginStatus.textContent = 'Login successful!';
+        loginStatus.className = 'status-message success';
+      } catch (error) {
+        loginStatus.textContent = error.message;
+        loginStatus.className = 'status-message error';
+      } finally {
+        loginBtn.disabled = false;
+      }
+    });
+
+    logoutBtn.addEventListener('click', async () => {
+      await signOut(auth);
+      loginStatus.textContent = 'You have been signed out.';
+      loginStatus.className = 'status-message';
+    });
+
+    uploadForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const category = document.getElementById('resourceCategory').value;
+      const title = document.getElementById('resourceTitle').value.trim();
+      const description = document.getElementById('resourceDescription').value.trim();
+      const link = document.getElementById('resourceLink').value.trim();
+
+      if (!title || !link) {
+        formStatus.textContent = 'Title and link are required.';
+        formStatus.className = 'status-message error';
+        return;
+      }
+
+      const resourceRef = ref(db, `resources/${category}`);
+      const payload = {
+        title,
+        link,
+        description: description || null,
+        createdAt: serverTimestamp()
+      };
+
+      try {
+        await push(resourceRef, payload);
+        formStatus.textContent = 'Resource published successfully!';
+        formStatus.className = 'status-message success';
+        uploadForm.reset();
+        document.getElementById('resourceCategory').value = category;
+      } catch (error) {
+        formStatus.textContent = error.message;
+        formStatus.className = 'status-message error';
+      }
+    });
+
+    const loadRecentResources = () => {
+      if (detachRecentListener) {
+        detachRecentListener();
+      }
+
+      recentResources.innerHTML = '<p>Loading recent uploads…</p>';
+      const latestRef = query(ref(db, 'resources'), limitToLast(12));
+
+      detachRecentListener = onValue(latestRef, (snapshot) => {
+        if (!snapshot.exists()) {
+          recentResources.innerHTML = '<p>No uploads yet.</p>';
+          return;
+        }
+
+        const cards = [];
+        snapshot.forEach((categorySnap) => {
+          const category = categorySnap.key;
+          categorySnap.forEach((itemSnap) => {
+            const data = itemSnap.val();
+            cards.push({ ...data, category });
+          });
+        });
+
+        cards.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+        recentResources.innerHTML = cards.map((item) => {
+          const isVideo = item.link?.includes('youtube.com') || item.link?.includes('youtu.be');
+          const embedLink = isVideo ? item.link.replace('watch?v=', 'embed/') : null;
+
+          return `
+            <div class="resource-card">
+              <p><strong>Category:</strong> ${item.category?.toUpperCase() || 'GENERAL'}</p>
+              ${isVideo ? `<iframe src="${embedLink}" allowfullscreen></iframe>` : `<a href="${item.link}" target="_blank">Open resource</a>`}
+              <h3>${item.title || 'Untitled resource'}</h3>
+              ${item.description ? `<p>${item.description}</p>` : ''}
+            </div>
+          `;
+        }).join('');
+      });
+    };
+  </script>
+</body>
+</html>
